@@ -1,6 +1,8 @@
 
+
+// The initial screen of the quiz app where users can start the game and select a difficulty level.
 const StartScreen = ({ onStart, difficulty, setDifficulty }) => {
-  // Retrieve high score from localStorage
+  // Get the existing high score from localStorage, or default to 0 if not found.
   const highScore = localStorage.getItem('quizHighScore') || 0;
   
   return (
@@ -13,6 +15,7 @@ const StartScreen = ({ onStart, difficulty, setDifficulty }) => {
         You'll face 10 questions with a 30-second timer for each.
       </p>
       
+      {/* Conditionally displays the high score only if one has been set. */}
       {highScore > 0 && (
         <p 
           className="text-lg text-amber-400 mb-6" 
@@ -30,6 +33,7 @@ const StartScreen = ({ onStart, difficulty, setDifficulty }) => {
           Select Difficulty:
         </label>
         
+        {/* The dropdown's value and onChange handler are managed by the parent App component. */}
         <select 
           id="difficulty"
           value={difficulty}

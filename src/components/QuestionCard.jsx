@@ -1,3 +1,4 @@
+// src/components/QuestionCard.jsx
 import React, { useState, useEffect } from 'react';
 
 const QuestionCard = ({
@@ -9,18 +10,21 @@ const QuestionCard = ({
   onNext,
   onPrevious
 }) => {
+  // Initialize timer → load from localStorage or default to 30
   const [timeLeft, setTimeLeft] = useState(() => {
     const saved = localStorage.getItem(`quizTimer_${questionNumber}`);
     return saved ? parseInt(saved, 10) : 30;
   });
 
+  // Reset timer when question changes
   useEffect(() => {
     const saved = localStorage.getItem(`quizTimer_${questionNumber}`);
     setTimeLeft(saved ? parseInt(saved, 10) : 30);
   }, [questionNumber]);
 
+  // Countdown logic
   useEffect(() => {
-    if (selectedAnswer || timeLeft <= 0) return;
+    if (selectedAnswer || timeLeft <= 0) return; // stop if answered or time over
 
     const timerId = setInterval(() => {
       setTimeLeft(prev => {
@@ -29,22 +33,24 @@ const QuestionCard = ({
 
         if (newTime <= 0) {
           clearInterval(timerId);
-          onAnswerSelect("Time's Up"); 
+          onAnswerSelect("Time's Up"); // auto-submit if time runs out
           return 0;
         }
         return newTime;
       });
     }, 1000);
 
-    return () => clearInterval(timerId);
+    return () => clearInterval(timerId); // cleanup on unmount/re-render
   }, [selectedAnswer, questionNumber, timeLeft, onAnswerSelect]);
 
+  // Remove stored timer once answered
   useEffect(() => {
     if (selectedAnswer) {
       localStorage.removeItem(`quizTimer_${questionNumber}`);
     }
   }, [selectedAnswer, questionNumber]);
 
+  // Button styling logic (correct = green, wrong = red, disabled = faded)
   const getButtonStyle = (option) => {
     if (!selectedAnswer) {
       return "bg-slate-700 hover:bg-sky-700 focus:ring-sky-500";
@@ -60,6 +66,7 @@ const QuestionCard = ({
 
   return (
     <div className="animate-fade-in-fast">
+      {/* Question header with timer */}
       <div className="flex justify-between items-center mb-4 text-slate-400">
         <span className="text-sm">
           Question {questionNumber} of {totalQuestions}
@@ -87,8 +94,10 @@ const QuestionCard = ({
         ></div>
       </div>
 
+      {/* Question text */}
       <h2 className="text-2xl font-semibold mb-6">{questionData.question}</h2>
 
+      {/* Options */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {questionData.options.map((option, index) => (
           <button
@@ -102,6 +111,7 @@ const QuestionCard = ({
         ))}
       </div>
 
+      {/* Navigation buttons */}
       <div className="flex justify-between items-center mt-8">
         <button
           onClick={onPrevious}
