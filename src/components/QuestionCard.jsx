@@ -1,4 +1,3 @@
-// src/components/QuestionCard.jsx
 import React, { useState, useEffect } from 'react';
 
 const QuestionCard = ({

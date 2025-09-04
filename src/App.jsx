@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
-import QuizPage from './Pages/QuizPage';
+import QuizPage from './pages/QuizPage';
 import ResultsPage from './pages/ResultsPage';
 import { decodeHtml } from './utils/helpers';
 
@@ -128,7 +128,7 @@ const App = () => {
   const restartQuiz = () => {
     setQuizState('start');
     localStorage.removeItem('quizProgress');
-    // Clear all timer data
+    
     Object.keys(localStorage).forEach(key => {
       if (key.startsWith('quizTimer_')) {
         localStorage.removeItem(key);
