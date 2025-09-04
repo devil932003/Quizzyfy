@@ -138,8 +138,8 @@ const App = () => {
   };
 
   return (
-    <div className="bg-slate-900 text-white min-h-screen flex flex-col items-center justify-center font-sans p-4 font-inter">
-      <div className="w-full max-w-2xl mx-auto">
+    <div className="bg-slate-900 text-white min-h-screen flex flex-col items-center justify-between font-sans p-4 font-inter">
+      <div className="w-full max-w-2xl mx-auto flex-1">
         <Header />
         <main className="bg-slate-800 rounded-2xl shadow-2xl p-6 md:p-8 mt-6">
           <Routes>
@@ -184,6 +184,9 @@ const App = () => {
           </Routes>
         </main>
       </div>
+      <footer className="text-slate-500 text-sm mt-6 mb-2">
+        Made with ❤️ by Devansh Mishra
+      </footer>
     </div>
   );
 };
