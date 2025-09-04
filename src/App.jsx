@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
-import QuizPage from './Pages/QuizPage'; 
+import QuizPage from './pages/QuizPage'; 
 import ResultsPage from './pages/ResultsPage';
 import { decodeHtml } from './utils/helpers';
 
